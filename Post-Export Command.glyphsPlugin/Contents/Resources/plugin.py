@@ -50,8 +50,6 @@ class PostExportCommand(GeneralPlugin):
             elif font.customParameters[customParameterKey]:
                 command = font.customParameters[customParameterKey]
 
-            print(command)
-
             if command:
                 result = subprocess.run(
                     [command, fontFilePath],
@@ -60,8 +58,7 @@ class PostExportCommand(GeneralPlugin):
 
                 if result.returncode != 0:
                     print(
-                        f"Error running plugin “Post-Export Command” for exported file {fontFilePath} for instance {instance.name}. Command terminated with return code {result.returncode}:")
-                    print(result.stdout)
+                        f"Error running plugin “Post-Export Command” for exported file {fontFilePath} for instance {instance.name}. Command terminated with return code {result.returncode}:\n{result.stdout}")
         except:
             import traceback
             print(traceback.format_exc())
