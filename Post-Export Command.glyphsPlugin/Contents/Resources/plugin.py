@@ -32,7 +32,6 @@ class PostExportCommand(GeneralPlugin):
 
     @objc.python_method
     def exportCallback(self, info):
-        print("Export")
         try:
             note = info.object()
             instance = note["instance"]
@@ -60,6 +59,8 @@ class PostExportCommand(GeneralPlugin):
                     capture_output=True)
 
                 if result.returncode != 0:
+                    print(
+                        f"Error running plugin “Post-Export Command” for exported file {fontFilePath} for instance {instance.name}. Command terminated with return code {result.returncode}:")
                     print(result.stdout)
         except:
             import traceback
